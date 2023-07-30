@@ -64,6 +64,12 @@ yarn prisma migrate dev --name <ghi_những_thay_đổi>
 yarn prisma studio
 ```
 
+để load các thay đổi trên prisma, dùng lệnh:
+
+```shell
+yarn prisma migrate dev
+```
+
 > **Lưu ý:**
 >
 > - Vui lòng cài đặt extension Prisma
