@@ -50,6 +50,20 @@ với API doc truy cập
 API_ENDPOINT/api-doc/
 ```
 
+#### **PRISMA\_**
+
+để thực hiện sửa cơ sở dữ liệu trên prisma, dùng lệnh
+
+```shell
+yarn prisma migrate dev --name <ghi_những_thay_đổi>
+```
+
+để hiện các object đang tồn tại trong prisma, dùng lệnh
+
+```shell
+yarn prisma studio
+```
+
 > **Lưu ý:**
 >
 > - Vui lòng cài đặt extension Prisma
