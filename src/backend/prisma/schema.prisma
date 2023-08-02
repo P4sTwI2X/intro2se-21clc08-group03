@@ -101,7 +101,7 @@ model Artical {
   userId String
   articalId String @unique
   title String 
-  content Json
+  content String
 
   status String
   createdAt DateTime  @default(now())

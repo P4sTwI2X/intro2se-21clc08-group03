@@ -6,6 +6,7 @@ import swaggerUI from "swagger-ui-express";
 import objectRouter from "./routes/object.route";
 import errorHandler from "./middlewares/errorHandler.middlewares";
 import userRouter from "./routes/user.route";
+import articleRouter from "./routes/article.route";
 import cors from "cors";
 const PORT = process.env.PORT || 8080;
 
@@ -54,3 +55,4 @@ app.use("/api-doc/", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 app.use("/objects/", objectRouter);
 app.use("/users/", userRouter);
+app.use("/articles/", articleRouter);

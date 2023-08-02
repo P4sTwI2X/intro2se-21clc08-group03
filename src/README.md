@@ -76,4 +76,4 @@ yarn prisma migrate dev
 > - Tạo file `.env` cùng cấp với `.env.sample` (copy-patse file) và điền các thông tin cần thiết.
 > - Sử dụng postgreSQL 15
 
-## Happuy coding !
+## Happy coding !
