@@ -1,8 +1,9 @@
 import { error } from "console";
-import { Status } from "../enum";
+import { Status, UserType } from "../enum";
 import { User } from "../interface/user.interface";
 import { compareHashFn, hashFn } from "../utils/helper";
 import { prisma } from "./prisma.services";
+import { equal } from "assert";
 
 //--- EXAMPLE ----  https://playground.prisma.io/examples/writing/create/create
 export const userService = {
@@ -25,12 +26,33 @@ export const userService = {
     return response;
   },
 
+  checkAdmin: async (userId: string) => {
+    const user = await prisma.user.findFirstOrThrow({
+      where: {
+        AND: [
+          {
+            userId: {
+              equals: userId,
+            },
+          },
+          {
+            type: {
+              equals: UserType.admin,
+            },
+          },
+        ],
+      },
+    });
+    return user;
+  },
+
   findUser: async (member: { userName: string; password: string }) => {
     const { userName, password } = member;
 
     const user = await prisma.user.findFirstOrThrow({
       where: {
         userName,
+        status: Status.active,
       },
     });
     if (await compareHashFn(password, user.password)) {

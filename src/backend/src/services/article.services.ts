@@ -8,18 +8,62 @@ import { Prisma } from "@prisma/client";
 export const articleService = {
   createArticle: async (article: Article) => {
     const { userId, title, content } = article;
-    const articalId = await hashFn(title);
-    console.log(content);
+    const articleId = await hashFn(title);
 
-    const response = await prisma.artical.create({
+    const response = await prisma.article.create({
       data: {
         userId,
-        articalId,
+        articleId,
         title,
         content: JSON.stringify(content),
         status: Status.active,
       },
     });
     return response;
+  },
+
+  findArticle: async (news: { title: string }) => {
+    const { title } = news;
+
+    const article = await prisma.article.findMany({
+      where: {
+        title,
+        status: Status.active,
+      },
+    });
+    return article;
+  },
+
+  updateArticle: async (
+    article: Partial<Omit<Article, "articleId">> & { articleId: string }
+  ) => {
+    let { articleId, title, content } = article;
+
+    const updatedArticleCount = await prisma.article.updateMany({
+      where: {
+        articleId,
+      },
+      data: {
+        title,
+        content: JSON.stringify(content),
+      },
+    });
+    return updatedArticleCount;
+  },
+
+  disableArticle: async (
+    article: Partial<Omit<Article, "articleId">> & { articleId: string }
+  ) => {
+    const { articleId } = article;
+
+    const updatedArticleCount = await prisma.article.updateMany({
+      where: {
+        articleId,
+      },
+      data: {
+        status: Status.deactive,
+      },
+    });
+    return updatedArticleCount;
   },
 };

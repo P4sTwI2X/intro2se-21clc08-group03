@@ -8,6 +8,11 @@ import errorHandler from "./middlewares/errorHandler.middlewares";
 import userRouter from "./routes/user.route";
 import articleRouter from "./routes/article.route";
 import cors from "cors";
+import shopsRouter from "./routes/shop.route";
+import ratesRouter from "./routes/rate.route";
+import productsRouter from "./routes/product.route";
+import detailRouter from "./routes/orderdetail.route";
+import orderRouter from "./routes/order.route";
 const PORT = process.env.PORT || 8080;
 
 const options = {
@@ -54,5 +59,10 @@ app.use("/api-doc/", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 // ____ WRITE FROM HERE ____
 
 app.use("/objects/", objectRouter);
+app.use("/shops/", shopsRouter);
 app.use("/users/", userRouter);
 app.use("/articles/", articleRouter);
+app.use("/rates/", ratesRouter);
+app.use("/products/", productsRouter);
+app.use("/orders/", orderRouter);
+app.use("/details/", detailRouter);

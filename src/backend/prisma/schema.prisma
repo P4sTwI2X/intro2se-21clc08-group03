@@ -41,18 +41,18 @@ model User {
   status String
   createdAt DateTime  @default(now())
   updatedAt DateTime @updatedAt
-  type String
+  type String @default("Customer")
   
   // relation
   userShop Shop[] 
-  artical Artical[]
+  artical Article[]
   order Order[]
+  rate Rating_Shop[]
 
   //primary key
   @@id([userId])
 
 }
-
 
 // _____PRODUCT TABLE_____
 model Product {
@@ -80,15 +80,14 @@ model Shop {
   userId String
   shopId String @unique
   shopName String
-  productQuantity Int @default(0)
-  rating Float @default(0)
 
   status String
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // relation
   user User @relation(fields: [userId],references: [userId])
+  rate Rating_Shop[]
   product Product[]
   order Order[]
 
@@ -96,10 +95,24 @@ model Shop {
   @@id([shopId])
 }
 
-// _____ARTICLE TABLE_____  
-model Artical {
+// _____RATING SHOP TABLE_____
+model Rating_Shop {
+  shopId String 
   userId String
-  articalId String @unique
+  rate Int
+
+  // relation
+  shop Shop @relation(fields: [shopId], references: [shopId])
+  user User @relation(fields: [userId], references: [userId])
+
+  // primary key
+  @@id([shopId, userId])
+}
+
+// _____ARTICLE TABLE_____  
+model Article {
+  userId String
+  articleId String @unique
   title String 
   content String
 
@@ -111,7 +124,7 @@ model Artical {
   user User @relation(fields: [userId],references: [userId])
 
   // primary key
-  @@id([articalId])
+  @@id([articleId])
 }
 
 // _____ORDER TABLE_____
@@ -120,8 +133,6 @@ model Order {
   userId String 
   shopId String
   paymentMethod String 
-  totalPrice Float @default(0)
-  totalProduct Int @default(0)
 
   status String
   createdAt DateTime  @default(now())

@@ -7,4 +7,5 @@ export enum UserType {
 export enum Status {
   active = "Active",
   deactive = "Deactive",
+  in_process = "In process",
 }
