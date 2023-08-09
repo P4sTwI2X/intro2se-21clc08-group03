@@ -40,7 +40,7 @@ export const productService = {
   findProduct: async (goods: { productName: string }) => {
     const { productName } = goods;
 
-    const product = await prisma.product.findFirstOrThrow({
+    const product = await prisma.product.findMany({
       where: {
         productName,
         status: Status.active,

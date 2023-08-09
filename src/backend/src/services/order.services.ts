@@ -21,12 +21,12 @@ export const orderService = {
     return response;
   },
 
-  findOrder: async (u_order: { orderId: string }) => {
-    const { orderId } = u_order;
+  findOrder: async (u_order: { userId: string }) => {
+    const { userId } = u_order;
 
-    const order = await prisma.order.findFirstOrThrow({
+    const order = await prisma.order.findMany({
       where: {
-        orderId,
+        userId,
       },
     });
     return order;
