@@ -12,10 +12,153 @@ datasource db {
 
 // example
 model Object{
-  objectId Int @id @default(autoincrement())
+  objectId Int  @default(autoincrement())
   objectName String
   status Boolean
   createdAt DateTime  @default(now())
   updatedAt DateTime @updatedAt
   
+  //relation
+//  kasjdlaskdfjalsd
+
+  //primary
+  @@id([objectId])
+
   }
+
+// _____USER TABLE_____
+model User {
+  userId String @unique 
+  userName String @unique
+  password String
+  email String @unique
+  home String 
+  phone String 
+  gender String
+  dob DateTime
+  bankAccount String 
+
+  status String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+  type String @default("Customer")
+  
+  // relation
+  userShop Shop[] 
+  artical Article[]
+  order Order[]
+  rate Rating_Shop[]
+
+  //primary key
+  @@id([userId])
+
+}
+
+// _____PRODUCT TABLE_____
+model Product {
+  shopId String
+  productId String @unique
+  productName String 
+  quantity Int @default(0)
+  price Float @default(0)
+  description String
+
+  status String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relation
+  shop Shop @relation(fields: [shopId],references: [shopId])
+  orderDetail Order_Detail[]
+
+  // primary key
+  @@id([productId])
+}
+
+// _____SHOP TABLE_____
+model Shop {
+  userId String
+  shopId String @unique
+  shopName String
+
+  status String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relation
+  user User @relation(fields: [userId],references: [userId])
+  rate Rating_Shop[]
+  product Product[]
+  order Order[]
+
+  // primary key
+  @@id([shopId])
+}
+
+// _____RATING SHOP TABLE_____
+model Rating_Shop {
+  shopId String 
+  userId String
+  rate Int
+
+  // relation
+  shop Shop @relation(fields: [shopId], references: [shopId])
+  user User @relation(fields: [userId], references: [userId])
+
+  // primary key
+  @@id([shopId, userId])
+}
+
+// _____ARTICLE TABLE_____  
+model Article {
+  userId String
+  articleId String @unique
+  title String 
+  content String
+
+  status String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relation
+  user User @relation(fields: [userId],references: [userId])
+
+  // primary key
+  @@id([articleId])
+}
+
+// _____ORDER TABLE_____
+model Order {
+  orderId String @unique
+  userId String 
+  shopId String
+  paymentMethod String 
+
+  status String
+  createdAt DateTime  @default(now())
+  
+  // relation
+  user User @relation(fields: [userId], references: [userId])
+  shop Shop @relation(fields: [shopId], references: [shopId])
+  orderDetail Order_Detail[]
+
+  // primary key
+  @@id([orderId])
+}
+
+// _____ORDER DETIAL TABLE_____
+model Order_Detail {
+  orderId String
+  productId String
+  quantity Int @default(0)
+  price Float @default(0)
+  
+  createdAt DateTime  @default(now())
+
+  // relation
+  order Order @relation(fields: [orderId], references: [orderId])
+  product Product @relation(fields: [productId], references: [productId])
+
+  //primary key
+  @@id([orderId, productId])
+}
