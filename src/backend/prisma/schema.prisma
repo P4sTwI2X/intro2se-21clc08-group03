@@ -59,6 +59,7 @@ model Product {
   shopId String
   productId String @unique
   productName String 
+  image String
   quantity Int @default(0)
   price Float @default(0)
   description String
