@@ -7,6 +7,7 @@ import Root from "./routes/root.tsx";
 import ErrorPage from "./error-page.tsx";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import HomePage from "./components/HomePage.tsx";
+import ProductDetails from "./components/ProductDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "login",
         element: <div>Login page</div>,
       },
+      {
+        path: "product/:productId",
+        element: <ProductDetails />
+      }
     ],
   },
 ]);
