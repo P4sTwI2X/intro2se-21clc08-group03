@@ -8,6 +8,8 @@ import ErrorPage from "./error-page.tsx";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import HomePage from "./components/HomePage.tsx";
 import ProductDetails from "./components/ProductDetails.tsx";
+import LoginPage from "./routes/login.tsx";
+import { actionLogin } from "./routes/authentication.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +22,13 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <div>Login page</div>,
+        element: <LoginPage />,
+        action: actionLogin,
       },
       {
         path: "product/:productId",
-        element: <ProductDetails />
-      }
+        element: <ProductDetails />,
+      },
     ],
   },
 ]);
