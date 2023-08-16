@@ -9,7 +9,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import HomePage from "./components/HomePage.tsx";
 import ProductDetails from "./components/ProductDetails.tsx";
 import LoginPage from "./routes/login.tsx";
-import { actionLogin } from "./routes/authentication.tsx";
+import { actionLogin, actionSignUp } from "./routes/authentication.tsx";
+import SignUpPage from "./routes/signup.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: "product/:productId",
         element: <ProductDetails />,
+      },
+      {
+        path: "sign-up",
+        element: <SignUpPage />,
+        action: actionSignUp,
       },
     ],
   },
