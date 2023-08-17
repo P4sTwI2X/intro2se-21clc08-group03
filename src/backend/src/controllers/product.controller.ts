@@ -22,7 +22,8 @@ export const productController = {
 
   searchProduct: async (req: Request, res: Response, next: any) => {
     try {
-      const data = await productService.findProduct(req.body);
+      const { productName } = req.query as { productName: string };
+      const data = await productService.findProduct({ productName });
       return res.status(200).json({ data: data, message: "success" });
     } catch (err) {
       next(err);

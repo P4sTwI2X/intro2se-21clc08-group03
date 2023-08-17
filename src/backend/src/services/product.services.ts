@@ -39,11 +39,21 @@ export const productService = {
 
   findProduct: async (goods: { productName: string }) => {
     const { productName } = goods;
+    const tsquerySpecialChars = /[()|&:*!]/g;
+    const temp = productName
+      .trim()
+      .replace(tsquerySpecialChars, " ")
+      .split(/\s+/)
+      .join(" & ");
 
     const product = await prisma.product.findMany({
       where: {
-        productName,
-        status: Status.active,
+        status: {
+          equals: Status.active,
+        },
+        productName: {
+          search: temp,
+        },
       },
     });
     return product;

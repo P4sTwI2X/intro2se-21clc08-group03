@@ -14,11 +14,7 @@ productsRouter.post(
   errorHandler
 );
 
-productsRouter.post(
-  "/searchProduct",
-  productController.searchProduct,
-  errorHandler
-);
+productsRouter.get("/", productController.searchProduct, errorHandler);
 
 productsRouter.post("/update", productController.update, errorHandler);
 

@@ -24,11 +24,21 @@ export const articleService = {
 
   findArticle: async (news: { title: string }) => {
     const { title } = news;
-
+    const tsquerySpecialChars = /[()|&:*!]/g;
+    const temp = title
+      .trim()
+      .replace(tsquerySpecialChars, " ")
+      .split(/\s+/)
+      .join(" & ");
     const article = await prisma.article.findMany({
       where: {
-        title,
-        status: Status.active,
+        status: {
+          equals: Status.active,
+        },
+
+        title: {
+          search: temp,
+        },
       },
     });
     return article;
