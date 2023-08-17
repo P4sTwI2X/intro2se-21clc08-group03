@@ -11,6 +11,7 @@ import ProductDetails from "./components/ProductDetails.tsx";
 import LoginPage from "./routes/login.tsx";
 import { actionLogin, actionSignUp } from "./routes/authentication.tsx";
 import SignUpPage from "./routes/signup.tsx";
+import SearchPage from "./routes/search.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path: "sign-up",
         element: <SignUpPage />,
         action: actionSignUp,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
       },
     ],
   },
