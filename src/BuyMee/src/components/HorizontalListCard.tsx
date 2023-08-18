@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HorizontalListCard({ data, title }: { data: Array<any>; title: String }) {
   const itemPerPage = 5;
@@ -38,9 +39,8 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
                 (Array.from({ length: itemPerPage }),
                 (_: any, index: number) => {
                   if (index < data.length) {
-                    console.log(index);
                     return (
-                      <div className=" flex flex-col" key={index}>
+                      <Link className=" flex flex-col" key={index} to={"/product/1"}>
                         <img
                           src={data?.[index].image.toString()}
                           width={200}
@@ -50,7 +50,7 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
                         />
                         <div className="text-lg font-semibold mt-8 mb-1">{data?.[index].name}</div>
                         <div className=" mb-4 ">{data?.[index].price}$</div>
-                      </div>
+                      </Link>
                     );
                   } else <div></div>;
                 })
@@ -58,13 +58,13 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
             </>
           ) : (
             data?.map((e: any, key: number) => {
-              if (key >= current && key < current + itemPerPage )
+              if (key >= current && key < current + itemPerPage)
                 return (
-                  <div className=" flex flex-col" key={key}>
+                  <Link className=" flex flex-col" to={"/product/1"}>
                     <img src={e.image.toString()} width={200} height={200} alt="boss" className="rounded-md" />
                     <div className="text-lg font-semibold mt-8 mb-1">{e.name}</div>
                     <div className=" mb-4 ">{e.price}$</div>
-                  </div>
+                  </Link>
                 );
               else <div></div>;
             })

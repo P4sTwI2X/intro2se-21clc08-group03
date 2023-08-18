@@ -7,11 +7,12 @@ import Root from "./routes/root.tsx";
 import ErrorPage from "./error-page.tsx";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import HomePage from "./components/HomePage.tsx";
-import ProductDetails from "./components/ProductDetails.tsx";
-import LoginPage from "./routes/login.tsx";
+import ProductDetails from "./routes/ProductDetails.tsx";
+import LoginPage from "./routes/LoginPage.tsx";
 import { actionLogin, actionSignUp } from "./routes/authentication.tsx";
-import SignUpPage from "./routes/signup.tsx";
-import SearchPage from "./routes/search.tsx";
+import SignUpPage from "./routes/SignUpPage.tsx";
+import CartPage from "./routes/CartPage.tsx";
+import SearchPage from "./routes/SearchPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <SearchPage />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
       },
     ],
   },
