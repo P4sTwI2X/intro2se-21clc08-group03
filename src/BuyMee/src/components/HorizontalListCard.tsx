@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Product } from "../models/product";
 
-function HorizontalListCard({ data, title }: { data: Array<any>; title: String }) {
+function HorizontalListCard({ data, title }: { data: Array<Product>; title: String }) {
   const itemPerPage = 5;
   const [current, setCurrent] = useState(0);
   function moveLeft() {
@@ -40,7 +41,7 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
                 (_: any, index: number) => {
                   if (index < data.length) {
                     return (
-                      <Link className=" flex flex-col" key={index} to={"/product/1"}>
+                      <Link className=" flex flex-col" key={index} to={`/product/${data[index].productId}`}>
                         <img
                           src={data?.[index].image.toString()}
                           width={200}
@@ -48,8 +49,8 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
                           alt="boss"
                           className="rounded-md"
                         />
-                        <div className="text-lg font-semibold mt-8 mb-1">{data?.[index].name}</div>
-                        <div className=" mb-4 ">{data?.[index].price}$</div>
+                        <div className="text-lg font-semibold mt-8 mb-1">{data[index].productName}</div>
+                        <div className=" mb-4 ">{data[index].price}$</div>
                       </Link>
                     );
                   } else <div></div>;
@@ -60,7 +61,7 @@ function HorizontalListCard({ data, title }: { data: Array<any>; title: String }
             data?.map((e: any, key: number) => {
               if (key >= current && key < current + itemPerPage)
                 return (
-                  <Link className=" flex flex-col" to={"/product/1"}>
+                  <Link className=" flex flex-col" key={key} to={`/product/${e.productId}`}>
                     <img src={e.image.toString()} width={200} height={200} alt="boss" className="rounded-md" />
                     <div className="text-lg font-semibold mt-8 mb-1">{e.name}</div>
                     <div className=" mb-4 ">{e.price}$</div>

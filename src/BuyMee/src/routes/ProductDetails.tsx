@@ -1,16 +1,10 @@
-import { Link } from "react-router-dom";
-import { Product } from "../models/product";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
+import productList from "../models/product.json";
 
 export default function ProductDetails() {
-  const product: Product = {
-    description: "Breifly info about product",
-    image: "/assets/images/product.png",
-    price: 69.99,
-    productName: "Product Name",
-    quantity: 5,
-    shopId: "SHOP NAME",
-  };
+  const { id } = useParams();
+  const product = productList.arr[parseInt(id || "1") - 1];
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="w-full flex justify-center items-center px-20 py-10 space-x-20">
@@ -19,7 +13,7 @@ export default function ProductDetails() {
       </div>
       <div className="w-1/2">
         <h1 className="font-extrabold text-4xl">{product.productName}</h1>
-        <h2 className="font-light text-[#828282] text-lg mt-3">{product.shopId}</h2>
+        <h2 className="font-light text-[#828282] text-lg mt-3">{`SHOP${product.productId}`}</h2>
         <div className="flex items-center space-x-6 my-6">
           <p className="line-through text-[#828282] text-xl">$99.99</p>
           <p className="text-red-600 font-extrabold text-3xl">${product.price}</p>
