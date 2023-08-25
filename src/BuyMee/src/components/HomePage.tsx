@@ -1,51 +1,7 @@
 import HorizontalListCard from "./HorizontalListCard";
+import productList from "../models/product.json";
 
 export default function HomePage() {
-  const dummyData = [
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 100",
-    },
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 200",
-    },
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 100",
-    },
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 200",
-    },
-    
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 100",
-    },
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 300",
-    },
-    
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 100",
-    },
-    {
-      image: "./boss1.png",
-      name: "Dog 1",
-      price: " 6700",
-    },
-  ];
-
   return (
     <div className="flex flex-col py-10  px-10 w-full ">
       {/* Banner */}
@@ -76,9 +32,9 @@ export default function HomePage() {
       </div>
 
       {/* Horizontal */}
-      <HorizontalListCard title={"Boss"} data={dummyData} />
+      <HorizontalListCard title={"Boss"} data={productList.arr} />
 
-      <HorizontalListCard title={"Boss service"} data={dummyData} />
+      <HorizontalListCard title={"Boss service"} data={productList.arr} />
     </div>
   );
 }
