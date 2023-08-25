@@ -1,6 +1,12 @@
-import CartItem from "../components/CartItem";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
+import cartSample from "../models/cart.json";
+import { Cart } from "../models/cart";
+import SingleCartItem from "../components/SingleCartItem";
 
 const CartPage = () => {
+  const [cookie, setCookie] = useCookies(["cart"]);
+  const [cart, setCart] = useState(!cookie.cart ? (cartSample as Cart) : (cookie.cart as Cart));
   return (
     <div className="flex flex-col py-10  px-10 w-full bg-amber-100">
       <div className="flex flex-row justify-between mb-8">
@@ -15,10 +21,10 @@ const CartPage = () => {
           </button>
         </div>
       </div>
-
-      <CartItem />
-      <CartItem />
-      <CartItem />
+      {cart.length == 0 && <p>There are no products in your cart</p>}
+      {cart.arr.map((value, index) => {
+        return <SingleCartItem item={value} key={`cart${index}`} />;
+      })}
     </div>
   );
 };

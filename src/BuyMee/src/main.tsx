@@ -13,6 +13,7 @@ import { actionLogin, actionSignUp } from "./routes/authentication.tsx";
 import SignUpPage from "./routes/SignUpPage.tsx";
 import CartPage from "./routes/CartPage.tsx";
 import SearchPage from "./routes/SearchPage.tsx";
+import { CookiesProvider } from "react-cookie";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router={router} />
+    </CookiesProvider>
   </React.StrictMode>
 );
