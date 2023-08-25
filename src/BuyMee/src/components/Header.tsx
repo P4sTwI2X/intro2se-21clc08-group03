@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Cart } from "../models/cart";
+import cartSample from "../models/cart.json";
+import { Cookies, useCookies } from "react-cookie";
 
 export default function Header() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
+  const [cookie, setCookie] = useCookies(["cart"]);
+  const [len, setLen] = useState(
+    !cookie.cart ?cartSample.length: (cookie.cart as Cart).arr.length
+  );
+  useEffect(() => {
+    setLen(!cookie.cart ? cartSample.length:(cookie.cart as Cart).arr.length);
+  }, [cookie]);
   return (
     <nav className="bg-[#7A9D54] border-none dark:bg-gray-900 grid grid-rows-2 gap-0">
       <div className="w-full flex flex-wrap items-center justify-end px-10">
@@ -77,7 +87,8 @@ export default function Header() {
           className="relative block py-2 pl-3 pr-4 text-white hover:text-yellow-400 rounded"
           aria-current="page"
         >
-          <i className="bi bi-cart3 text-3xl"></i>
+          <i className="relative bi bi-cart3 text-3xl"></i>
+          <p className="bg-red-600 text-white px-2 py-0 absolute z-10 top-0 right-0 text-sm rounded-md">{len}</p>
         </Link>
       </div>
     </nav>

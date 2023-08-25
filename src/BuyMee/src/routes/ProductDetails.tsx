@@ -1,8 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import productList from "../models/product.json";
+import { Cart, CartItem } from "../models/cart";
+import cartSample from "../models/cart.json";
+import { useCookies } from "react-cookie";
 
 export default function ProductDetails() {
+  const [cookie, setCookie] = useCookies(["cart"]);
+  const [cart, setCart] = useState(!cookie.cart ? (cartSample as Cart) : (cookie.cart as Cart));
   const { id } = useParams();
   const product = productList.arr[parseInt(id || "1") - 1];
   const [quantity, setQuantity] = useState(1);
@@ -58,7 +63,37 @@ export default function ProductDetails() {
             Buy Now
           </button>
           <div className="flex w-full justify-between text-[#7A9D54] mt-4 space-x-5 ">
-            <button className="py-2 px-4  border border-solid border-[#7A9D54] rounded-md bg-white w-full hover:border-yellow-500 hover:text-yellow-500">
+            <button
+              onClick={async () => {
+                let arr = cart.arr as CartItem[];
+                var isExist = false;
+                for (let i = 0; i < arr.length; i++) {
+                  if (product.productId == arr[i].productId) {
+                    arr[i].cartQuantity += quantity;
+                    isExist = true;
+                    break;
+                  }
+                }
+                if (!isExist) {
+                  arr.push({
+                    ...product,
+                    cartQuantity: quantity,
+                  });
+                }
+
+                setCookie(
+                  "cart",
+                  JSON.stringify({
+                    length: cart.length + (isExist ? 0 : 1),
+                    arr: arr,
+                  }),
+                  { path: "/" }
+                );
+
+                setCart(!cookie.cart ? (cartSample as Cart) : (cookie.cart as Cart));
+              }}
+              className="py-2 px-4  border border-solid border-[#7A9D54] rounded-md bg-white w-full hover:border-yellow-500 hover:text-yellow-500"
+            >
               <i className="bi bi-cart"></i>
               {" Add To Cart"}
             </button>
