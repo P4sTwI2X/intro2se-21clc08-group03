@@ -12,8 +12,8 @@ DROP TABLE "Artical";
 
 -- CreateTable
 CREATE TABLE "Article" (
-    "userId" TEXT NOT NULL,
-    "articleId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "articleId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "status" TEXT NOT NULL,

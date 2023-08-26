@@ -1,25 +1,26 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "userId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
     "userName" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "home" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "gender" TEXT NOT NULL,
-    "dob" TIMESTAMP(3) NOT NULL,
-    "bankAccount" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+	"fullName" TEXT NOT NULL,
+    "email" TEXT,
+    "home" TEXT,
+    "phone" TEXT,
+    "gender" TEXT,
+    "dob" TIMESTAMP(3),
+    "bankAccount" TEXT,
+    "status" TEXT,
+    "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "shopId" TEXT NOT NULL,
-    "productId" TEXT NOT NULL,
+    "shopId" INTEGER NOT NULL,
+    "productId" INTEGER NOT NULL,
     "productName" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL DEFAULT 0,
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
@@ -33,8 +34,8 @@ CREATE TABLE "Product" (
 
 -- CreateTable
 CREATE TABLE "Shop" (
-    "userId" TEXT NOT NULL,
-    "shopId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "shopId" INTEGER NOT NULL,
     "shopName" TEXT NOT NULL,
     "productQuantity" INTEGER NOT NULL DEFAULT 0,
     "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
@@ -47,8 +48,8 @@ CREATE TABLE "Shop" (
 
 -- CreateTable
 CREATE TABLE "Artical" (
-    "userId" TEXT NOT NULL,
-    "articalId" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "articalId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "content" JSONB NOT NULL,
     "status" TEXT NOT NULL,
@@ -60,9 +61,9 @@ CREATE TABLE "Artical" (
 
 -- CreateTable
 CREATE TABLE "Order" (
-    "orderId" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "shopId" TEXT NOT NULL,
+    "orderId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "shopId" INTEGER NOT NULL,
     "paymentMethod" TEXT NOT NULL,
     "totalPrice" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "totalProduct" INTEGER NOT NULL DEFAULT 0,
@@ -74,8 +75,8 @@ CREATE TABLE "Order" (
 
 -- CreateTable
 CREATE TABLE "Order_Detail" (
-    "orderId" TEXT NOT NULL,
-    "productId" TEXT NOT NULL,
+    "orderId" INTEGER NOT NULL,
+    "productId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL DEFAULT 0,
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -88,9 +89,6 @@ CREATE UNIQUE INDEX "User_userId_key" ON "User"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_userName_key" ON "User"("userName");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Product_productId_key" ON "Product"("productId");

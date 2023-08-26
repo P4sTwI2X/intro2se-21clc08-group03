@@ -14,8 +14,8 @@ ALTER TABLE "User" ALTER COLUMN "type" SET DEFAULT 'Customer';
 
 -- CreateTable
 CREATE TABLE "Rating_Shop" (
-    "shopId" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "shopId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
     "rate" INTEGER NOT NULL,
 
     CONSTRAINT "Rating_Shop_pkey" PRIMARY KEY ("shopId","userId")

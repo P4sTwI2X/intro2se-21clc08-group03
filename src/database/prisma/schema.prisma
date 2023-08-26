@@ -10,37 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// example
-model Object{
-  objectId Int  @default(autoincrement())
-  objectName String
-  status Boolean
-  createdAt DateTime  @default(now())
-  updatedAt DateTime @updatedAt
-  
-  //relation
-//  kasjdlaskdfjalsd
-
-  //primary
-  @@id([objectId])
-
-  }
-
 // _____USER TABLE_____
 model User {
-  userId String @unique 
+  userId Int @unique 
   userName String @unique
   password String
-  email String @unique
-  home String 
-  phone String 
-  gender String
-  dob DateTime
-  bankAccount String 
+  fullName String
+  email String?
+  home String? 
+  phone String?
+  gender String?
+  dob DateTime?
+  bankAccount String? 
 
-  status String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime @updatedAt
+  status String?
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime? @updatedAt
   type String @default("Customer")
   
   // relation
@@ -56,8 +41,8 @@ model User {
 
 // _____PRODUCT TABLE_____
 model Product {
-  shopId String
-  productId String @unique
+  shopId Int
+  productId Int @unique
   productName String 
   image String
   quantity Int @default(0)
@@ -78,8 +63,8 @@ model Product {
 
 // _____SHOP TABLE_____
 model Shop {
-  userId String
-  shopId String @unique
+  userId Int
+  shopId Int @unique
   shopName String
 
   status String
@@ -98,8 +83,8 @@ model Shop {
 
 // _____RATING SHOP TABLE_____
 model Rating_Shop {
-  shopId String 
-  userId String
+  shopId Int 
+  userId Int
   rate Int
 
   // relation
@@ -112,8 +97,8 @@ model Rating_Shop {
 
 // _____ARTICLE TABLE_____  
 model Article {
-  userId String
-  articleId String @unique
+  userId Int
+  articleId Int @unique
   title String 
   content String
 
@@ -130,9 +115,9 @@ model Article {
 
 // _____ORDER TABLE_____
 model Order {
-  orderId String @unique
-  userId String 
-  shopId String
+  orderId Int @unique
+  userId Int 
+  shopId Int
   paymentMethod String 
 
   status String
@@ -149,8 +134,8 @@ model Order {
 
 // _____ORDER DETIAL TABLE_____
 model Order_Detail {
-  orderId String
-  productId String
+  orderId Int
+  productId Int
   quantity Int @default(0)
   price Float @default(0)
   
