@@ -31,7 +31,7 @@ export default function LoginForm() {
 
     if (data.token != null) {
       setCookie("token", data.token);
-      setCookie("fullname", data?.data?.FullName);
+      setCookie("fullname", data?.data?.fullName);
       setMessage("");
       navigate("/");
       return;

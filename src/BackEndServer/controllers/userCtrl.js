@@ -8,14 +8,11 @@ exports.postLogin = async (req, res) => {
 
     try {
         const user = await userModel.getUserByUsername(username);
-		console.log("done");
         if (!user) {
             return res.status(400).json({ status: 400, message: "Username doesn't exist" });
         }
         try {
-			console.log(password);
-			console.log(user.Password);
-            const cmp = await bcrypt.compare(password, user.Password);
+            const cmp = await bcrypt.compare(password, user.password);
             let token;
             if (cmp) {
                 token = jwt.sign(user, process.env.ACCESS_TOKEN_SECURE, {
@@ -41,7 +38,7 @@ exports.postLogin = async (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-    const { username, password, fullname, address } = req.body;
+    const { username, password, fullname} = req.body;
 
     const passHashed = await bcrypt.hashSync(password, saltRounds);
 
@@ -50,15 +47,15 @@ exports.postRegister = async (req, res) => {
         username,
         password: passHashed,
         fullname,
-        address,
+		//address,
     };
 
     if (fullname == null) {
         return res.status(400).json({ status: 400, message: "Please provide your name to create new account" });
     }
-    if (address == null) {
+    /*if (address == null) {
         return res.status(400).json({ status: 400, message: "Please provide your address to create new account" });
-    }
+    }*/
 
     if (!isUsernameExist) {
         await userModel.insertUser(newUser);
@@ -76,7 +73,7 @@ exports.postRegister = async (req, res) => {
             data: {
                 username,
                 fullname,
-                address,
+                //address,
             },
         });
     }
