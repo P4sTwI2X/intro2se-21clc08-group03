@@ -1,5 +1,7 @@
 BuyMee Project
 
+## Sửa hai file tên '.env.sample' ở BackEndServer và database lại thành tên '.env'
+
 Cách thực hiện khởi động website:
 - Khai báo và tạo database:
 1. Mở PostgreSQL cmd (đã tải về PostgreSQL).
