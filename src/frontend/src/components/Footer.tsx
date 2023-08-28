@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex flex-col space-y-5">
-        <h1 className="text-2xl drop-shadow-xl text-rose-900 font-bold">About ByMee</h1>
+        <h1 className="text-2xl drop-shadow-xl text-rose-900 font-bold">About BuyMee</h1>
         <p className="text-white">
           This project is the final term project of <br></br> Introduction to Software Enginering in HCMUS
         </p>
